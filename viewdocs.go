@@ -149,6 +149,8 @@ func fetchAndRenderDoc(user, repo, ref, doc string) (string, error) {
 	output := strings.Replace(<-template, "{{CONTENT}}", string(body), 1)
 	output = strings.Replace(output, "{{NAME}}", repo, -1)
 	output = strings.Replace(output, "{{USER}}", user, -1)
+	output = strings.Replace(output, "\{\{","{{", -1)
+	output = strings.Replace(output, "\}\}","}}", -1)
 
 	// Fix relative links
 	output, err = fixRelativeLinks(doc, repo, ref, output)
